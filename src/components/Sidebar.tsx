@@ -48,11 +48,11 @@ export default function Sidebar() {
         <Link href="/" className="mb-1 flex items-baseline gap-2">
           <span className="font-mono text-accent text-sm">{"</>"}</span>
           <span className="font-display text-base font-semibold text-foreground">
-            Fundamentos
+            Fundamentos de Programacion
           </span>
         </Link>
         <p className="mb-10 text-xs text-muted">
-          Sistemas Computacionales · Primer semestre
+          Sistemas Computacionales · Primer semestre || S1A
         </p>
 
         <p className="mb-3 text-xs font-medium text-muted">Contenidos</p>
