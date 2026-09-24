@@ -7,6 +7,7 @@ const toc = [
   { id: "while", label: "El bucle while" },
   { id: "do-while", label: "El bucle do / while" },
   { id: "for", label: "El bucle for" },
+  { id: "resumen-comparativo", label: "¿Cuándo usar cuál?" },
   { id: "break-continue", label: "break y continue" },
   { id: "ejercicios", label: "Ejercicios para practicar" },
 ];
@@ -40,103 +41,147 @@ export default function RepeticionPage() {
         Estructuras de repetición
       </h1>
       <p className="mb-10 text-base leading-relaxed text-foreground/80">
-        Un bucle (o ciclo) ejecuta un bloque de código una y otra vez,
-        mientras se cumpla una condición. Ahorran tiempo, reducen errores y
-        evitan que repitas la misma instrucción cientos de veces a mano.
+        Un bucle (o ciclo) ejecuta un mismo bloque de código múltiples veces.
+        En lugar de copiar y pegar la misma línea 100 veces, le das una regla a la computadora:
+        <em>"Repite esto hasta que te diga lo contrario"</em>.
       </p>
 
       <h2 id="por-que" className="mb-4 mt-12 text-xl font-semibold text-foreground">
         ¿Para qué sirven los bucles?
       </h2>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        Imagina que necesitas imprimir un mensaje 3000 veces. Escribirlo a
-        mano línea por línea no es una opción — para eso existen las
-        estructuras repetitivas. Java tiene tres formas principales:{" "}
-        <code className="font-mono text-accent">while</code>,{" "}
-        <code className="font-mono text-accent">do / while</code> y{" "}
-        <code className="font-mono text-accent">for</code>.
+        Sirven para automatizar tareas repetitivas: procesar listas de datos, pedir la contraseña al usuario hasta que sea correcta o contar cuántos intentos quedan. Java nos da tres herramientas según lo que necesitemos:
       </p>
 
+      {/* WHILE */}
       <h2 id="while" className="mb-4 mt-12 text-xl font-semibold text-foreground">
-        El bucle while
+        1. El bucle <code>while</code> (Mientras...)
       </h2>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        Repite un bloque de código mientras la condición sea verdadera. La
-        condición se evalúa <em>antes</em> de cada vuelta — si nunca es
-        verdadera, el bloque nunca se ejecuta.
+        <strong>Uso clave:</strong> Cuando <em>no sabes</em> cuántas veces se repetirá el ciclo (depende de una condición externa).
       </p>
-      <CodeBlock>{`int i = 0;
-while (i < 5) {
-  System.out.println(i);
-  i++;
-}`}</CodeBlock>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        Cuidado: si olvidas aumentar la variable de la condición (
-        <code className="font-mono text-accent">i++</code>), el ciclo nunca
-        termina.
+        <strong>Analogía:</strong> Como un semáforo. <em>Mientras</em> la luz esté en rojo, te quedas esperando. Si al llegar ya está en verde, ni siquiera te detienes.
       </p>
+      <CodeBlock>{`int contador = 0;
 
+// Revisa la condición ANTES de entrar
+while (contador < 3) {
+    System.out.println("Vuelta número: " + contador);
+    contador++; // IMPORTANTE: Cambia la condición para evitar un bucle infinito
+}`}</CodeBlock>
+      <div className="mb-6 rounded-lg bg-amber-500/10 p-4 text-sm text-amber-200">
+        ⚠️ <strong>Ojo:</strong> Si la condición es falsa desde el inicio (ej. <code>contador = 5</code>), el bloque <strong>nunca</strong> se ejecutará.
+      </div>
+
+      {/* DO WHILE */}
       <h2 id="do-while" className="mb-4 mt-12 text-xl font-semibold text-foreground">
-        El bucle do / while
+        2. El bucle <code>do / while</code> (Hacer... mientras)
       </h2>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        Es igual al while, con una diferencia importante: el bloque se
-        ejecuta primero, y la condición se revisa después. Esto garantiza
-        que el código se ejecute al menos una vez, aunque la condición sea
-        falsa desde el principio.
+        <strong>Uso clave:</strong> Cuando necesitas que el código se ejecute <strong>al menos una vez</strong>, sin importar si la condición es cierta o no al principio.
       </p>
-      <CodeBlock>{`int i = 5;
+      <p className="mb-4 leading-relaxed text-foreground/80">
+        <strong>Analogía:</strong> Probarse un par de zapatos. Primero te los pones (se ejecuta la acción) y <em>luego</em> decides si te quedan bien o necesitas probarte otros.
+      </p>
+      <CodeBlock>{`int opcion;
+
 do {
-  System.out.println(i);
-  i++;
-} while (i < 15);`}</CodeBlock>
+    System.out.println("--- MENÚ ---");
+    System.out.println("1. Jugar  2. Salir");
+    opcion = pedirOpcionAlUsuario();
+} while (opcion != 2); // Revisa la condición AL FINAL de la vuelta`}</CodeBlock>
 
+      {/* FOR */}
       <h2 id="for" className="mb-4 mt-12 text-xl font-semibold text-foreground">
-        El bucle for
+        3. El bucle <code>for</code> (Para...)
       </h2>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        Cuando sabes exactamente cuántas veces quieres repetir algo, el{" "}
-        <code className="font-mono text-accent">for</code> es más directo
-        que el <code className="font-mono text-accent">while</code>: junta
-        la inicialización, la condición y el incremento en una sola línea.
+        <strong>Uso clave:</strong> Cuando <em>sabes exactamente</em> cuántas veces quieres repetir el proceso (ej. 10 veces, 100 veces, o la longitud de una lista).
       </p>
-      <CodeBlock>{`for (int i = 0; i < 5; i++) {
-  System.out.println(i);
-}`}</CodeBlock>
       <p className="mb-4 leading-relaxed text-foreground/80">
-        <code className="font-mono text-accent">int i = 0</code> se ejecuta
-        una sola vez al inicio; <code className="font-mono text-accent">i &lt; 5</code> se revisa antes de cada vuelta; y{" "}
-        <code className="font-mono text-accent">i++</code> se ejecuta al
-        final de cada vuelta. Puedes cambiar el paso, por ejemplo para
-        imprimir solo números pares:
+        Junta en una sola línea las tres partes que necesita todo contador:
       </p>
-      <CodeBlock>{`for (int i = 0; i <= 10; i = i + 2) {
-  System.out.println(i);
+      <CodeBlock>{`// for ( Inicio ; Condición ; Paso )
+for (int i = 0; i < 5; i++) {
+    System.out.println("Número: " + i);
 }`}</CodeBlock>
+      <ul className="mb-6 ml-6 list-disc space-y-2 text-sm text-foreground/80">
+        <li><code>int i = 0</code> ➔ <strong>Inicio:</strong> Se crea la variable (solo ocurre una vez).</li>
+        <li><code>i &lt; 5</code> ➔ <strong>Condición:</strong> Se evalúa antes de cada vuelta. Si es <code>true</code>, entra.</li>
+        <li><code>i++</code> ➔ <strong>Paso:</strong> Se ejecuta automáticamente al <em>terminar</em> cada vuelta.</li>
+      </ul>
 
-      <h2 id="break-continue" className="mb-4 mt-12 text-xl font-semibold text-foreground">
-        break y continue
+      {/* TABLA COMPARATIVA */}
+      <h2 id="resumen-comparativo" className="mb-4 mt-12 text-xl font-semibold text-foreground">
+        💡 Resumen: ¿Cuál debo usar?
       </h2>
-      <p className="mb-4 leading-relaxed text-foreground/80">
-        Dentro de un bucle, <code className="font-mono text-accent">break</code> sale del ciclo por completo, y{" "}
-        <code className="font-mono text-accent">continue</code> salta el
-        resto de esa vuelta y pasa directo a la siguiente.
-      </p>
-      <CodeBlock>{`// break: se detiene al llegar a 4
-for (int i = 0; i < 10; i++) {
-  if (i == 4) {
-    break;
-  }
-  System.out.println(i);
-}
+      <div className="mb-8 overflow-x-auto">
+        <table className="w-full text-left text-sm text-foreground/80 border-collapse border border-foreground/10">
+          <thead className="bg-foreground/5 text-foreground">
+            <tr>
+              <th className="p-3 border border-foreground/10">Bucle</th>
+              <th className="p-3 border border-foreground/10">¿Cuándo usarlo?</th>
+              <th className="p-3 border border-foreground/10">Ejecución mínima</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="p-3 border border-foreground/10 font-mono text-accent">for</td>
+              <td className="p-3 border border-foreground/10">Sabes el número exacto de repeticiones.</td>
+              <td className="p-3 border border-foreground/10">0 veces</td>
+            </tr>
+            <tr>
+              <td className="p-3 border border-foreground/10 font-mono text-accent">while</td>
+              <td className="p-3 border border-foreground/10">No sabes cuántas veces se repetirá y depende de una condición.</td>
+              <td className="p-3 border border-foreground/10">0 veces</td>
+            </tr>
+            <tr>
+              <td className="p-3 border border-foreground/10 font-mono text-accent">do / while</td>
+              <td className="p-3 border border-foreground/10">Necesitas mostrar o procesar algo al menos una vez (ej. menús).</td>
+              <td className="p-3 border border-foreground/10"><strong>1 vez</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-// continue: se salta el valor 4, pero sigue el ciclo
-for (int i = 0; i < 10; i++) {
-  if (i == 4) {
-    continue;
-  }
-  System.out.println(i);
+{/* BREAK Y CONTINUE */}
+<h2 id="break-continue" className="mb-4 mt-12 text-xl font-semibold text-foreground">
+  Control de flujo: <code>break</code> y <code>continue</code>
+</h2>
+<p className="mb-6 leading-relaxed text-foreground/80">
+  Te permiten alterar el comportamiento normal de cualquier bucle:
+</p>
+
+<div className="flex flex-col gap-6 mb-8">
+  {/* Bloque break */}
+  <div className="rounded-lg border border-foreground/10 p-5 bg-foreground/5">
+    <h3 className="font-mono text-lg text-accent font-semibold mb-1">
+      break (Romper)
+    </h3>
+    <p className="text-sm text-foreground/80 mb-4">
+      Detiene y <strong>sale por completo</strong> del bucle de inmediato.
+    </p>
+    <CodeBlock>{`for (int i = 1; i <= 10; i++) {
+  if (i == 4) break; // Se detiene al llegar a 4
+  System.out.println(i); // Imprime 1, 2, 3
 }`}</CodeBlock>
+  </div>
+
+  {/* Bloque continue */}
+  <div className="rounded-lg border border-foreground/10 p-5 bg-foreground/5">
+    <h3 className="font-mono text-lg text-accent font-semibold mb-1">
+      continue (Saltar)
+    </h3>
+    <p className="text-sm text-foreground/80 mb-4">
+      Interrumpe la vuelta actual y <strong>pasa directamente a la siguiente</strong>.
+    </p>
+    <CodeBlock>{`for (int i = 1; i <= 5; i++) {
+  if (i == 3) continue; // Salta el número 3
+  System.out.println(i); // Imprime 1, 2, 4, 5
+}`}</CodeBlock>
+  </div>
+</div>
 
       <h2 id="ejercicios" className="mb-4 mt-12 text-xl font-semibold text-foreground">
         Ejercicios para practicar
