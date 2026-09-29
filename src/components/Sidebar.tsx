@@ -11,9 +11,9 @@ const temas = [
   { numero: "04", nombre: "Condicionales", ruta: "/condicionales" },
   { numero: "05", nombre: "Switch", ruta: "/switch" },
   { numero: "06", nombre: "Repetición", ruta: "/repeticion" },
-  // { numero: "07", nombre: "Arreglos", ruta: "/arreglos" },
-  // { numero: "08", nombre: "Funciones", ruta: "/funciones" },
-  // { numero: "09", nombre: "Cadenas", ruta: "/cadenas" },
+  { numero: "07", nombre: "Arreglos", ruta: "/arreglos" },
+  { numero: "08", nombre: "Funciones", ruta: "/funciones" },
+  { numero: "09", nombre: "Cadenas", ruta: "/cadenas" },
 ];
 
 export default function Sidebar() {
